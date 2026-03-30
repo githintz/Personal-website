@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #6b6b6b;
+      --border: #e5e5e5;
+      --accent: #2c2c2c;
+      --tab-active-underline: #1a1a1a;
+      --hover: #f5f5f5;
+      --max-width: 780px;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      padding: 48px 24px 0;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: normal;
+      letter-spacing: -0.02em;
+    }
+
+    header p.tagline {
+      margin-top: 6px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ── Tabs ── */
+    nav.tabs {
+      max-width: var(--max-width);
+      margin: 36px auto 0;
+      padding: 0 24px;
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav.tabs button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px 20px 12px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--muted);
+      position: relative;
+      transition: color 0.15s;
+    }
+
+    nav.tabs button:first-child { padding-left: 0; }
+
+    nav.tabs button::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--tab-active-underline);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+
+    nav.tabs button.active {
+      color: var(--text);
+    }
+
+    nav.tabs button.active::after {
+      transform: scaleX(1);
+    }
+
+    nav.tabs button:first-child::after { left: 0; }
+
+    /* ── Tab panels ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Research panel ── */
+    #research {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* Bio section */
+    .bio {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      margin-bottom: 56px;
+    }
+
+    .bio-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--border);
+      /* placeholder color when no image */
+    }
+
+    .bio-photo-placeholder {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: var(--hover);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+
+    .bio-text h2 {
+      font-size: 1.1rem;
+      font-weight: normal;
+      margin-bottom: 10px;
+    }
+
+    .bio-text p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .bio-links {
+      margin-top: 14px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .bio-links a {
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .bio-links a:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
+    /* Section headings */
+    .section-label {
+      font-family: system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    section { margin-bottom: 52px; }
+
+    /* Publications */
+    .pub-list { list-style: none; }
+
+    .pub-item {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-title {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    .pub-meta {
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .pub-links {
+      margin-top: 6px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .pub-links a {
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.15s;
+    }
+
+    .pub-links a:hover { color: var(--text); }
+
+    /* Projects */
+    .project-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 580px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .bio { flex-direction: column; }
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      transition: background 0.15s;
+    }
+
+    .project-card:hover { background: var(--hover); }
+
+    .project-card h3 {
+      font-size: 0.95rem;
+      font-weight: normal;
+      margin-bottom: 8px;
+    }
+
+    .project-card p {
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .project-card a {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.15s;
+    }
+
+    .project-card a:hover { color: var(--text); }
+
+    /* ── Photography panel ── */
+    #photography {
+      padding: 48px 0 80px;
+    }
+
+    .photo-intro {
+      max-width: var(--max-width);
+      margin: 0 auto 36px;
+      padding: 0 24px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Horizontal scroll strip */
+    .photo-strip-wrapper {
+      position: relative;
+    }
+
+    .photo-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 24px 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+    }
+
+    .photo-strip:active { cursor: grabbing; }
+
+    .photo-strip::-webkit-scrollbar { height: 4px; }
+    .photo-strip::-webkit-scrollbar-track { background: transparent; }
+    .photo-strip::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 2px;
+    }
+
+    .photo-item {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      height: 420px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .photo-item img {
+      height: 100%;
+      width: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .photo-item:hover img { transform: scale(1.02); }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 14px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.45));
+      color: white;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .photo-item:hover .photo-caption { opacity: 1; }
+
+    /* Placeholder photo items */
+    .photo-placeholder {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      height: 420px;
+      border-radius: 4px;
+      background: var(--hover);
+      border: 1px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .photo-placeholder .icon {
+      font-size: 1.8rem;
+      opacity: 0.3;
+    }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 2px;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.15s;
+    }
+
+    .lightbox-close:hover { opacity: 1; }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.7);
+      font-family: system-ui, sans-serif;
+      font-size: 0.82rem;
+      white-space: nowrap;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      font-family: system-ui, sans-serif;
+      font-size: 0.78rem;
+      color: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Your Name</h1>
+    <p class="tagline">PhD Student &middot; Institution &middot; your.email@university.edu</p>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="active" onclick="switchTab('research')" role="tab" aria-selected="true">Research</button>
+    <button onclick="switchTab('photography')" role="tab" aria-selected="false">Photography</button>
+  </nav>
+
+  <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════════ -->
+  <div id="research" class="panel active">
+
+    <section class="bio">
+      <!-- Replace src with your actual photo path, e.g., src="images/photo.jpg" -->
+      <!-- <img class="bio-photo" src="images/photo.jpg" alt="Your Name"> -->
+      <div class="bio-photo-placeholder">photo</div>
+
+      <div class="bio-text">
+        <h2>About me</h2>
+        <p>
+          I'm a researcher at [Institution] working on [your research area].
+          My work focuses on [one or two sentences describing your interests and goals].
+          Before this, I [brief prior background if relevant].
+        </p>
+        <div class="bio-links">
+          <a href="cv.pdf">CV</a>
+          <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
+          <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+          <a href="https://twitter.com/yourusername" target="_blank">Twitter / X</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="section-label">Publications</p>
+      <ul class="pub-list">
+
+        <li class="pub-item">
+          <p class="pub-title">Title of Your Most Recent Paper</p>
+          <p class="pub-meta">Your Name, Co-author Name &middot; Conference/Journal Name, 2025</p>
+          <div class="pub-links">
+            <a href="#">PDF</a>
+            <a href="#">arXiv</a>
+            <a href="#">Code</a>
+          </div>
+        </li>
+
+        <li class="pub-item">
+          <p class="pub-title">Title of an Earlier Paper</p>
+          <p class="pub-meta">Your Name, Co-author Name &middot; Conference/Journal Name, 2024</p>
+          <div class="pub-links">
+            <a href="#">PDF</a>
+            <a href="#">arXiv</a>
+          </div>
+        </li>
+
+        <!-- Add more publications by duplicating a <li class="pub-item"> block -->
+
+      </ul>
+    </section>
+
+    <section>
+      <p class="section-label">Projects</p>
+      <div class="project-grid">
+
+        <div class="project-card">
+          <h3>Project Title One</h3>
+          <p>Short description of what this project is about and what problem it addresses.</p>
+          <a href="#">View project &rarr;</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Project Title Two</h3>
+          <p>Short description of what this project is about and what problem it addresses.</p>
+          <a href="#">View project &rarr;</a>
+        </div>
+
+        <!-- Add more project cards as needed -->
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ══════════════════════════════ PHOTOGRAPHY ════════════════════════════ -->
+  <div id="photography" class="panel">
+
+    <div class="photo-intro">
+      A selection of photos from my travels and everyday wanderings.
+    </div>
+
+    <div class="photo-strip-wrapper">
+      <div class="photo-strip" id="photoStrip">
+
+        <!--
+          To add a real photo:
+            1. Put your image file in an "images/" folder next to index.html
+            2. Replace a placeholder block below with:
+
+          <div class="photo-item" onclick="openLightbox(this)">
+            <img src="images/yourphoto.jpg" alt="caption here">
+            <div class="photo-caption">caption here</div>
+          </div>
+        -->
+
+        <div class="photo-placeholder" style="width:300px">
+          <span class="icon">&#9654;</span>
+          <span>Add your photos</span>
+        </div>
+        <div class="photo-placeholder" style="width:280px">
+          <span class="icon">&#9654;</span>
+          <span>See instructions below</span>
+        </div>
+        <div class="photo-placeholder" style="width:320px">
+          <span class="icon">&#9654;</span>
+          <span>in index.html</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <footer>
+    &copy; 2026 Your Name
+  </footer>
+
+  <script>
+    // ── Tab switching ──
+    function switchTab(name) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav.tabs button').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.getElementById(name).classList.add('active');
+      const btn = [...document.querySelectorAll('nav.tabs button')]
+        .find(b => b.textContent.toLowerCase() === name);
+      if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
+    }
+
+    // ── Lightbox ──
+    function openLightbox(el) {
+      const img = el.querySelector('img');
+      const cap = el.querySelector('.photo-caption');
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightboxImg').alt = img.alt;
+      document.getElementById('lightboxCaption').textContent = cap ? cap.textContent : '';
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ── Drag-to-scroll on photo strip ──
+    const strip = document.getElementById('photoStrip');
+    let isDown = false, startX, scrollLeft;
+
+    strip.addEventListener('mousedown', e => {
+      isDown = true;
+      startX = e.pageX - strip.offsetLeft;
+      scrollLeft = strip.scrollLeft;
+    });
+    strip.addEventListener('mouseleave', () => isDown = false);
+    strip.addEventListener('mouseup', () => isDown = false);
+    strip.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - strip.offsetLeft;
+      strip.scrollLeft = scrollLeft - (x - startX);
+    });
+  </script>
+
+</body>
+</html>
