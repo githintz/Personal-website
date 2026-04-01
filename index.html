@@ -11,30 +11,30 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f8f7f4;
-      --surface: #ffffff;
-      --text: #18181b;
-      --muted: #71717a;
-      --subtle: #a1a1aa;
-      --border: #e4e4e7;
-      --accent: #1e4976;
+      --frame:        #0b1120;
+      --frame-text:   #e2e8f0;
+      --bg:           #f8f7f4;
+      --surface:      #ffffff;
+      --text:         #18181b;
+      --muted:        #71717a;
+      --subtle:       #a1a1aa;
+      --border:       #e4e4e7;
+      --accent:       #1e4976;
       --accent-light: #e8f0f9;
-      --hover: #f4f4f5;
-      --max-width: 800px;
-      --radius: 8px;
+      --max-width:    840px;
+      --radius:       8px;
     }
 
     body {
       font-family: 'Lora', Georgia, serif;
-      background: var(--bg);
+      background: var(--frame);
       color: var(--text);
       min-height: 100vh;
     }
 
-    /* ── Header ── */
+    /* ── Header ────────────────────────────────────────────── */
     header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
+      background: var(--frame);
       padding: 40px 24px 0;
     }
 
@@ -48,22 +48,21 @@
       font-size: 2rem;
       font-weight: 500;
       letter-spacing: -0.03em;
-      color: var(--text);
+      color: var(--frame-text);
     }
 
     header p.tagline {
       margin-top: 6px;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
-      color: var(--muted);
+      color: rgba(226, 232, 240, 0.55);
       letter-spacing: 0.01em;
     }
 
-    /* ── Tabs ── */
+    /* ── Tabs ─────────────────────────────────────────────── */
     nav.tabs {
       margin: 28px 0 0;
       display: flex;
-      gap: 0;
     }
 
     nav.tabs button {
@@ -74,7 +73,7 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.875rem;
       font-weight: 500;
-      color: var(--muted);
+      color: rgba(226, 232, 240, 0.5);
       position: relative;
       transition: color 0.15s;
       letter-spacing: 0.01em;
@@ -89,30 +88,38 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--accent);
+      background: var(--frame-text);
       border-radius: 2px 2px 0 0;
       transform: scaleX(0);
       transition: transform 0.2s ease;
     }
 
     nav.tabs button:first-child::after { left: 0; }
-
-    nav.tabs button.active { color: var(--accent); }
+    nav.tabs button.active { color: var(--frame-text); }
     nav.tabs button.active::after { transform: scaleX(1); }
-    nav.tabs button:not(.active):hover { color: var(--text); }
+    nav.tabs button:not(.active):hover { color: var(--frame-text); }
 
-    /* ── Tab panels ── */
+    /* ── Content column (the light card on dark bg) ─────────── */
+    .content-column {
+      max-width: calc(var(--max-width) + 48px);
+      margin: 0 auto;
+      background: var(--bg);
+      min-height: 80vh;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+    }
+
+    /* ── Tab panels ──────────────────────────────────────────── */
     .panel { display: none; }
     .panel.active { display: block; }
 
-    /* ── Research panel ── */
+    /* ── Research panel ──────────────────────────────────────── */
     #research {
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
 
-    /* Bio section */
+    /* Bio */
     .bio {
       display: flex;
       gap: 28px;
@@ -146,7 +153,6 @@
       font-size: 0.72rem;
       font-family: 'Inter', sans-serif;
       font-weight: 500;
-      text-align: center;
     }
 
     .bio-text h2 {
@@ -190,7 +196,7 @@
       border-color: #9ec4e0;
     }
 
-    /* Section headings */
+    /* Section labels */
     .section-label {
       font-family: 'Inter', sans-serif;
       font-size: 0.68rem;
@@ -245,7 +251,6 @@
       font-size: 0.92rem;
       line-height: 1.55;
       margin-bottom: 5px;
-      color: var(--text);
     }
 
     .pub-meta {
@@ -281,22 +286,17 @@
       gap: 16px;
     }
 
-    @media (max-width: 580px) {
-      .project-grid { grid-template-columns: 1fr; }
-      .bio { flex-direction: column; }
-    }
-
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
       border-radius: var(--radius);
       padding: 20px 22px;
       transition: box-shadow 0.2s, border-color 0.2s;
-      border-left: 3px solid var(--accent);
     }
 
     .project-card:hover {
-      box-shadow: 0 4px 16px rgba(30,73,118,0.08);
+      box-shadow: 0 4px 16px rgba(30, 73, 118, 0.08);
       border-color: #c3d9ef;
     }
 
@@ -305,7 +305,6 @@
       font-size: 0.875rem;
       font-weight: 600;
       margin-bottom: 8px;
-      color: var(--text);
     }
 
     .project-card p {
@@ -315,7 +314,7 @@
       line-height: 1.65;
     }
 
-    /* ── Photography panel ── */
+    /* ── Photography panel ───────────────────────────────────── */
     #photography {
       padding: 48px 0 80px;
     }
@@ -330,7 +329,6 @@
       font-style: italic;
     }
 
-    /* Horizontal scroll strip */
     .photo-strip-wrapper { position: relative; }
 
     .photo-strip {
@@ -358,11 +356,11 @@
       overflow: hidden;
       position: relative;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
       transition: box-shadow 0.2s;
     }
 
-    .photo-item:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.14); }
+    .photo-item:hover { box-shadow: 0 6px 20px rgba(0, 0, 0, 0.14); }
 
     .photo-item img {
       height: 100%;
@@ -378,7 +376,7 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       padding: 32px 16px 14px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
       color: white;
       font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
@@ -388,7 +386,6 @@
 
     .photo-item:hover .photo-caption { opacity: 1; }
 
-    /* Placeholder photo items */
     .photo-placeholder {
       flex-shrink: 0;
       scroll-snap-align: start;
@@ -408,12 +405,12 @@
 
     .photo-placeholder .icon { font-size: 2rem; opacity: 0.25; }
 
-    /* ── Lightbox ── */
+    /* ── Lightbox ────────────────────────────────────────────── */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(10,10,15,0.92);
+      background: rgba(10, 10, 15, 0.92);
       z-index: 100;
       align-items: center;
       justify-content: center;
@@ -426,7 +423,7 @@
       max-height: 88vh;
       object-fit: contain;
       border-radius: 4px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
     }
 
     .lightbox-close {
@@ -448,20 +445,27 @@
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       font-family: 'Inter', sans-serif;
       font-size: 0.8rem;
       white-space: nowrap;
     }
 
-    /* ── Footer ── */
+    /* ── Footer ──────────────────────────────────────────────── */
     footer {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 24px 48px;
+      background: var(--frame);
+      color: rgba(226, 232, 240, 0.35);
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
-      color: var(--subtle);
+      text-align: center;
+      padding: 20px 24px;
+    }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .project-grid { grid-template-columns: 1fr; }
+      .bio { flex-direction: column; }
+      header h1 { font-size: 1.6rem; }
     }
   </style>
 </head>
@@ -469,8 +473,8 @@
 
   <header>
     <div class="header-inner">
-      <h1>Githin Tom Zachariah</h1>
-      <p class="tagline">PhD Researcher &middot; University of Limerick, Ireland &middot; githintz@gmail.com</p>
+      <h1 id="site-name"></h1>
+      <p class="tagline" id="site-tagline"></p>
       <nav class="tabs" role="tablist">
         <button class="active" onclick="switchTab('research')" role="tab" aria-selected="true">Research</button>
         <button onclick="switchTab('photography')" role="tab" aria-selected="false">Photography</button>
@@ -478,169 +482,20 @@
     </div>
   </header>
 
-  <!-- ═══════════════════════════════ RESEARCH ═══════════════════════════════ -->
-  <div id="research" class="panel active">
+  <div class="content-column">
 
-    <section class="bio">
-      <!-- Replace src with your actual photo path, e.g., src="images/photo.jpg" -->
-      <!-- <img class="bio-photo" src="images/photo.jpg" alt="Githin Tom Zachariah"> -->
-      <div class="bio-photo-placeholder">photo</div>
-
-      <div class="bio-text">
-        <h2>About me</h2>
-        <p>
-          I'm a PhD researcher at the University of Limerick, Ireland, supervised by Prof. Harry Van Den Akker.
-          My work focuses on embedding local DNS periodic boxes in Large Eddy Simulations, with specialisations in
-          Computational Fluid Dynamics, Lattice Boltzmann methods, Turbulence Modelling, and Multiphase flows.
-          I hold an MSc. (<em>Cum Laude</em>) in Chemical Engineering from TU Delft and a B.E. in Chemical Engineering
-          from BITS Pilani, Hyderabad. Outside research, I specialise in landscape, wildlife, and astrophotography.
-        </p>
-        <div class="bio-links">
-          <a href="cv.pdf">CV</a>
-          <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
-          <a href="mailto:githintz@gmail.com">Email</a>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <p class="section-label">Publications</p>
-      <ul class="pub-list">
-
-        <li class="pub-item">
-          <span class="pub-year">2025</span>
-          <div class="pub-body">
-            <p class="pub-title">Modelling the sub-grid scales of turbulent emulsions using Periodic Box Homogeneous Isotropic Turbulence</p>
-            <p class="pub-meta">Zachariah, G. &amp; Van den Akker, H. &middot; <em>In preparation</em></p>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2025</span>
-          <div class="pub-body">
-            <p class="pub-title">Novel Lattice Boltzmann approaches to the Euler-Euler equations for two-phase flows</p>
-            <p class="pub-meta">Zachariah, G. &amp; Van den Akker, H. &middot; <em>In review</em></p>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2023</span>
-          <div class="pub-body">
-            <p class="pub-title">Representing the Small Scales of Turbulence by Periodic Box Homogeneous Isotropic Turbulence Simulations</p>
-            <p class="pub-meta">Zachariah, G. &amp; Van den Akker, H. &middot; <em>Flow Turbulence and Combustion</em></p>
-            <div class="pub-links"><a href="https://doi.org/10.1007/s10494-023-00497-0" target="_blank">DOI</a></div>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2022</span>
-          <div class="pub-body">
-            <p class="pub-title">A Mesoscopic Approach for Evaporation in Capillary Porous Media</p>
-            <p class="pub-meta">Panda, D., Paliwal, S., Bhaskaran, S., Zachariah, G., Tsotsas, E., Kharaghani, R. &amp; Surasani, V. &middot; <em>CRC Press</em></p>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2021</span>
-          <div class="pub-body">
-            <p class="pub-title">Real-time temperature measurement in stochastic rotation dynamics</p>
-            <p class="pub-meta">Fan, R., Zachariah, G., Padding, J. &amp; Hartkamp, R. &middot; <em>Physical Review E</em> 104</p>
-            <div class="pub-links"><a href="https://doi.org/10.1103/PhysRevE.104.034124" target="_blank">DOI</a></div>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2021</span>
-          <div class="pub-body">
-            <p class="pub-title">On Using Variable Molecular Masses in Multicomponent Lattice Boltzmann Simulations</p>
-            <p class="pub-meta">Van den Akker, H., Donkers, R., Zachariah, G. &amp; Shardt, O. &middot; <em>Journal of Computational Science</em> 54</p>
-            <div class="pub-links"><a href="https://doi.org/10.1016/j.jocs.2021.101432" target="_blank">DOI</a></div>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2018</span>
-          <div class="pub-body">
-            <p class="pub-title">Lattice Boltzmann Simulations for Invasion Patterns during Drying of Capillary Porous Media</p>
-            <p class="pub-meta">Zachariah, G., Panda, D. &amp; Surasani, V. &middot; <em>Chemical Engineering Science</em> 196</p>
-            <div class="pub-links"><a href="https://doi.org/10.1016/j.ces.2018.11.003" target="_blank">DOI</a></div>
-          </div>
-        </li>
-
-        <li class="pub-item">
-          <span class="pub-year">2018</span>
-          <div class="pub-body">
-            <p class="pub-title">Simulation of Isothermal Drying of Porous Media using Lattice Boltzmann Method</p>
-            <p class="pub-meta">Zachariah, G. &amp; Surasani, V.K. &middot; <em>Poster, InterPore 2018</em>, New Orleans, USA</p>
-          </div>
-        </li>
-
-      </ul>
-    </section>
-
-    <section>
-      <p class="section-label">Projects</p>
-      <div class="project-grid">
-
-        <div class="project-card">
-          <h3>DNS in Large Eddy Simulations</h3>
-          <p>PhD project at University of Limerick. Developing a framework for embedding periodic box DNSs in LES, including DNS-informed LES of emulsions using databases. P.I: Prof. Harry Van Den Akker.</p>
-        </div>
-
-        <div class="project-card">
-          <h3>Non-isothermal Stochastic Rotation Dynamics</h3>
-          <p>Master's thesis at TU Delft. Built a framework for non-isothermal SRD simulations, novel thermal no-slip boundary conditions, and models for adsorption/reaction/desorption with energy transport. P.I: Prof. Dr. Ir Johan Padding.</p>
-        </div>
-
-        <div class="project-card">
-          <h3>Reactive Flow in Tubular Reactors</h3>
-          <p>Honours project at TU Delft &amp; University of Limerick. Modelled reactive flow with varying molecular weight using a variable speed-of-sound Lattice Boltzmann solver. P.I: Prof.Dr. Ir Harry van den Akker.</p>
-        </div>
-
-        <div class="project-card">
-          <h3>Drying of Porous Media via LBM</h3>
-          <p>Bachelor's thesis at BITS Pilani. Created a multi-component multi-phase LBM solver for drying in 2D porous media and studied Haines jumps at fluid interfaces. P.I: Prof. Vikranth Surasani.</p>
-        </div>
-
-      </div>
-    </section>
-
-  </div>
-
-  <!-- ══════════════════════════════ PHOTOGRAPHY ════════════════════════════ -->
-  <div id="photography" class="panel">
-
-    <div class="photo-intro">
-      Specialising in landscape, wildlife, and astrophotography.
+    <!-- Research panel -->
+    <div id="research" class="panel active">
+      <section class="bio" id="bio-section"></section>
+      <section id="publications-section"></section>
+      <section id="projects-section"></section>
     </div>
 
-    <div class="photo-strip-wrapper">
-      <div class="photo-strip" id="photoStrip">
-
-        <!--
-          To add a real photo:
-            1. Put your image file in an "images/" folder next to index.html
-            2. Replace a placeholder block below with:
-
-          <div class="photo-item" onclick="openLightbox(this)">
-            <img src="images/yourphoto.jpg" alt="caption here">
-            <div class="photo-caption">caption here</div>
-          </div>
-        -->
-
-        <div class="photo-placeholder" style="width:300px">
-          <span class="icon">&#9654;</span>
-          <span>Add your photos</span>
-        </div>
-        <div class="photo-placeholder" style="width:280px">
-          <span class="icon">&#9654;</span>
-          <span>See instructions below</span>
-        </div>
-        <div class="photo-placeholder" style="width:320px">
-          <span class="icon">&#9654;</span>
-          <span>in index.html</span>
-        </div>
-
+    <!-- Photography panel -->
+    <div id="photography" class="panel">
+      <div class="photo-intro" id="photo-intro"></div>
+      <div class="photo-strip-wrapper">
+        <div class="photo-strip" id="photoStrip"></div>
       </div>
     </div>
 
@@ -653,12 +508,155 @@
     <p class="lightbox-caption" id="lightboxCaption"></p>
   </div>
 
-  <footer>
-    &copy; 2026 Githin Tom Zachariah
-  </footer>
+  <footer id="site-footer"></footer>
 
+  <script src="data.js"></script>
   <script>
-    // ── Tab switching ──
+    // ── Helpers ──────────────────────────────────────────────
+    // Interprets *word* as <em>word</em>, rest as plain text.
+    function textWithItalics(str) {
+      const frag = document.createDocumentFragment();
+      str.split(/(\*[^*]+\*)/g).forEach(part => {
+        if (part.startsWith('*') && part.endsWith('*')) {
+          const em = document.createElement('em');
+          em.textContent = part.slice(1, -1);
+          frag.appendChild(em);
+        } else {
+          frag.appendChild(document.createTextNode(part));
+        }
+      });
+      return frag;
+    }
+
+    function el(tag, className) {
+      const e = document.createElement(tag);
+      if (className) e.className = className;
+      return e;
+    }
+
+    // ── Render ───────────────────────────────────────────────
+    function render() {
+
+      // Header
+      document.getElementById('site-name').textContent = SITE.name;
+      document.getElementById('site-tagline').textContent =
+        [SITE.role, SITE.institution, SITE.email].join(' · ');
+
+      // Bio
+      const bioSection = document.getElementById('bio-section');
+      if (SITE.photo) {
+        const img = el('img', 'bio-photo');
+        img.src = SITE.photo;
+        img.alt = SITE.name;
+        bioSection.appendChild(img);
+      } else {
+        const ph = el('div', 'bio-photo-placeholder');
+        ph.textContent = 'photo';
+        bioSection.appendChild(ph);
+      }
+      const bioText = el('div', 'bio-text');
+      const h2 = el('h2');
+      h2.textContent = 'About me';
+      const bioP = el('p');
+      bioP.appendChild(textWithItalics(SITE.bio));
+      const bioLinks = el('div', 'bio-links');
+      SITE.links.filter(l => l.url).forEach(l => {
+        const a = el('a');
+        a.href = l.url;
+        a.textContent = l.label;
+        if (l.url.startsWith('http')) a.target = '_blank';
+        bioLinks.appendChild(a);
+      });
+      bioText.append(h2, bioP, bioLinks);
+      bioSection.appendChild(bioText);
+
+      // Publications
+      const pubSection = document.getElementById('publications-section');
+      const pubLabel = el('p', 'section-label');
+      pubLabel.textContent = 'Publications';
+      const pubList = el('ul', 'pub-list');
+      SITE.publications.forEach(pub => {
+        const li = el('li', 'pub-item');
+        const yr = el('span', 'pub-year');
+        yr.textContent = pub.year;
+        const body = el('div', 'pub-body');
+        const title = el('p', 'pub-title');
+        title.textContent = pub.title;
+        const meta = el('p', 'pub-meta');
+        meta.appendChild(document.createTextNode(pub.authors + ' \u00b7 '));
+        const em = document.createElement('em');
+        em.textContent = pub.venue;
+        meta.appendChild(em);
+        body.append(title, meta);
+        if (pub.doi) {
+          const links = el('div', 'pub-links');
+          const a = el('a');
+          a.href = pub.doi;
+          a.textContent = 'DOI';
+          a.target = '_blank';
+          links.appendChild(a);
+          body.appendChild(links);
+        }
+        li.append(yr, body);
+        pubList.appendChild(li);
+      });
+      pubSection.append(pubLabel, pubList);
+
+      // Projects
+      const projSection = document.getElementById('projects-section');
+      const projLabel = el('p', 'section-label');
+      projLabel.textContent = 'Projects';
+      const grid = el('div', 'project-grid');
+      SITE.projects.forEach(proj => {
+        const card = el('div', 'project-card');
+        const h3 = el('h3');
+        h3.textContent = proj.title;
+        const p = el('p');
+        p.textContent = proj.description;
+        card.append(h3, p);
+        grid.appendChild(card);
+      });
+      projSection.append(projLabel, grid);
+
+      // Photography
+      document.getElementById('photo-intro').textContent = SITE.photoIntro;
+      const strip = document.getElementById('photoStrip');
+      if (!SITE.photos || SITE.photos.length === 0) {
+        [
+          { w: 300, text: 'Add your photos' },
+          { w: 280, text: 'Add { src, caption } objects' },
+          { w: 320, text: 'to photos: [ ] in data.js' },
+        ].forEach(ph => {
+          const d = el('div', 'photo-placeholder');
+          d.style.width = ph.w + 'px';
+          const icon = el('span', 'icon');
+          icon.textContent = '\u25b6';
+          const label = el('span');
+          label.textContent = ph.text;
+          d.append(icon, label);
+          strip.appendChild(d);
+        });
+      } else {
+        SITE.photos.forEach(photo => {
+          const item = el('div', 'photo-item');
+          item.addEventListener('click', () => openLightbox(item));
+          const img = el('img');
+          img.src = photo.src;
+          img.alt = photo.caption || '';
+          if (photo.width) item.style.width = photo.width + 'px';
+          const cap = el('div', 'photo-caption');
+          cap.textContent = photo.caption || '';
+          item.append(img, cap);
+          strip.appendChild(item);
+        });
+      }
+
+      // Footer — year auto-updates
+      document.getElementById('site-footer').textContent =
+        '\u00a9 ' + new Date().getFullYear() + ' ' + SITE.name;
+    }
+
+    // ── Tab switching ────────────────────────────────────────
     function switchTab(name) {
       document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('nav.tabs button').forEach(b => {
@@ -671,7 +669,7 @@
       if (btn) { btn.classList.add('active'); btn.setAttribute('aria-selected', 'true'); }
     }
 
-    // ── Lightbox ──
+    // ── Lightbox ─────────────────────────────────────────────
     function openLightbox(el) {
       const img = el.querySelector('img');
       const cap = el.querySelector('.photo-caption');
@@ -689,10 +687,9 @@
       if (e.key === 'Escape') closeLightbox();
     });
 
-    // ── Drag-to-scroll on photo strip ──
+    // ── Drag-to-scroll ────────────────────────────────────────
     const strip = document.getElementById('photoStrip');
     let isDown = false, startX, scrollLeft;
-
     strip.addEventListener('mousedown', e => {
       isDown = true;
       startX = e.pageX - strip.offsetLeft;
@@ -703,9 +700,11 @@
     strip.addEventListener('mousemove', e => {
       if (!isDown) return;
       e.preventDefault();
-      const x = e.pageX - strip.offsetLeft;
-      strip.scrollLeft = scrollLeft - (x - startX);
+      strip.scrollLeft = scrollLeft - (e.pageX - strip.offsetLeft - startX);
     });
+
+    // ── Init ─────────────────────────────────────────────────
+    render();
   </script>
 
 </body>
