@@ -11,8 +11,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --frame:        #0b1120;
-      --frame-text:   #e2e8f0;
+      --ink:          #0b1120;
       --bg:           #f8f7f4;
       --surface:      #ffffff;
       --text:         #18181b;
@@ -27,14 +26,16 @@
 
     body {
       font-family: 'Lora', Georgia, serif;
-      background: var(--frame);
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      /* Thin ink line at the very top of the viewport */
+      border-top: 3px solid var(--ink);
     }
 
     /* ── Header ────────────────────────────────────────────── */
     header {
-      background: var(--frame);
+      background: var(--bg);
       padding: 40px 24px 0;
     }
 
@@ -48,14 +49,24 @@
       font-size: 2rem;
       font-weight: 500;
       letter-spacing: -0.03em;
-      color: var(--frame-text);
+      color: var(--text);
+    }
+
+    /* Short decorative rule beneath the name */
+    header h1::after {
+      content: '';
+      display: block;
+      width: 52px;
+      height: 2px;
+      background: var(--ink);
+      margin-top: 10px;
     }
 
     header p.tagline {
-      margin-top: 6px;
+      margin-top: 10px;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
-      color: rgba(226, 232, 240, 0.55);
+      color: var(--muted);
       letter-spacing: 0.01em;
     }
 
@@ -63,6 +74,7 @@
     nav.tabs {
       margin: 28px 0 0;
       display: flex;
+      border-bottom: 1px solid var(--ink);
     }
 
     nav.tabs button {
@@ -73,7 +85,7 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.875rem;
       font-weight: 500;
-      color: rgba(226, 232, 240, 0.5);
+      color: var(--muted);
       position: relative;
       transition: color 0.15s;
       letter-spacing: 0.01em;
@@ -88,24 +100,20 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--frame-text);
-      border-radius: 2px 2px 0 0;
+      background: var(--ink);
       transform: scaleX(0);
       transition: transform 0.2s ease;
     }
 
     nav.tabs button:first-child::after { left: 0; }
-    nav.tabs button.active { color: var(--frame-text); }
+    nav.tabs button.active { color: var(--text); }
     nav.tabs button.active::after { transform: scaleX(1); }
-    nav.tabs button:not(.active):hover { color: var(--frame-text); }
+    nav.tabs button:not(.active):hover { color: var(--text); }
 
-    /* ── Content column (the light card on dark bg) ─────────── */
+    /* ── Content column ─────────────────────────────────────── */
     .content-column {
       max-width: calc(var(--max-width) + 48px);
       margin: 0 auto;
-      background: var(--bg);
-      min-height: 80vh;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
     }
 
     /* ── Tab panels ──────────────────────────────────────────── */
@@ -453,12 +461,15 @@
 
     /* ── Footer ──────────────────────────────────────────────── */
     footer {
-      background: var(--frame);
-      color: rgba(226, 232, 240, 0.35);
+      background: var(--bg);
+      color: var(--subtle);
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
       text-align: center;
-      padding: 20px 24px;
+      padding: 24px;
+      border-top: 1px solid var(--ink);
+      max-width: var(--max-width);
+      margin: 0 auto;
     }
 
     /* ── Responsive ──────────────────────────────────────────── */
