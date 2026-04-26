@@ -8,8 +8,8 @@ const SITE = {
 
   // ── Identity ──────────────────────────────────────────────
   name:        "Githin Tom Zachariah",
-  role:        "PhD Researcher",
-  institution: "University of Limerick, Ireland",
+  role:        "Post-Doctoral Researcher",
+  institution: "Paul Scherrer Institute, Switzerland",
   email:       "githintz@gmail.com",
 
   // ── Profile photo ─────────────────────────────────────────
@@ -18,8 +18,7 @@ const SITE = {
 
   // ── Bio ───────────────────────────────────────────────────
   // Wrap words in *asterisks* to italicise them.
-  bio: "I'm a PhD researcher at the University of Limerick, Ireland, supervised by Prof. Harry Van Den Akker. My work focuses on embedding local DNS periodic boxes in Large Eddy Simulations, with specialisations in Computational Fluid Dynamics, Lattice Boltzmann methods, Turbulence Modelling, and Multiphase flows. I hold an MSc. (*Cum Laude*) in Chemical Engineering from TU Delft and a B.E. in Chemical Engineering from BITS Pilani, Hyderabad. Outside research, I specialise in landscape, wildlife, and astrophotography.",
-
+  bio: "I'm a Post-doctoral researcher at the Paul Scherrer Institute in Switzerland with Dr. Nikolaos I. Prasianakis. I am currently working on a multiscale reactive transport simulation of Fe migration at the Fe-Cement interface due to corrosion. We focus on using machine learning techniques to accelerate speciation calculations and enable simulations of corrosion over very large time-spans. I completed my PhD in Chemical engineering from the University of Limerick, under the supervision of Prof. Dr. Harry Van den Akker, focusing on multiscale modelling of turbulence.",
   // ── Header links (shown as pill buttons in the bio card) ──
   // Set url to null to hide a link.
   links: [
