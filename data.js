@@ -14,7 +14,7 @@ const SITE = {
 
   // ── Profile photo ─────────────────────────────────────────
   // Set to a file path, e.g. "images/photo.jpg", or leave null for placeholder.
-  photo: null,
+  photo: "ME.jpeg",
 
   // ── Bio ───────────────────────────────────────────────────
   // Wrap words in *asterisks* to italicise them.
