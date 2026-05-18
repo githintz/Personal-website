@@ -109,11 +109,22 @@ const SITE = {
   ],
 
   // ── Photography ───────────────────────────────────────────
-  photoIntro: "Specialising in landscape, wildlife, and astrophotography.",
+  photoHero: {
+    title:    "Photography",
+    subtitle: "Specialising in landscape, wildlife, and astrophotography.",
+    cover:    "",   // optional: path to a hero background image, e.g. "images/hero.jpg"
+  },
 
-  // To add photos, add objects to this array. Example:
-  //   { src: "images/mountains.jpg", caption: "Dolomites, 2024", width: 320 }
-  // width is optional (pixels). Leave the array empty to show placeholder tiles.
-  photos: [],
+  // Albums: each has a title, subtitle, optional cover image, and a photos array.
+  // Example:
+  //   {
+  //     title:    "Landscapes",
+  //     subtitle: "Chasing light across the horizon",
+  //     cover:    "images/landscape-cover.jpg",
+  //     photos: [
+  //       { src: "images/mountains.jpg", caption: "Dolomites, 2024" },
+  //     ]
+  //   }
+  albums: [],
 
 };
